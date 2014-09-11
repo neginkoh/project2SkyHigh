@@ -33,11 +33,12 @@ public class Login extends javax.swing.JFrame
         this.setTitle("Welcome to Sky High Medical Center");
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         connect();
+        
     }
      public void connect() {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/SkyHigh");
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/Project2;user=skyhigh;password=skyhigh");
             System.out.println("Connected to database");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Failed to connect to the database, please start the server"
@@ -45,6 +46,8 @@ public class Login extends javax.swing.JFrame
             welcomeLabel.setText("Database failure. Please start the database.");
         }
     }
+    
+    
      public void validateLogin() {
         String user = txtUsername.getText();
         String pass = txtPassword.getText();
@@ -54,18 +57,27 @@ public class Login extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Either the username or password field is empty,"
                             + " please try again.");
 
-        } else if ("administrator".equals(user) && "admin".equals(pass)) {
+        } else if ("admin".equals(user) && "admin".equals(pass)) {
             welcomeLabel.setText("Success! Logging you in....");
         //backup user which always works
 
-            new Main().setVisible(true);
+            new AdminDashboard().setVisible(true);
             this.dispose();
 
-        } else {
+        } 
+        else if ("doctor".equals(user) && "doctor".equals(pass)) {
+            welcomeLabel.setText("Success! Logging you in....");
+        //backup user which always works
+
+            new DoctorInterface().setVisible(true);
+            this.dispose();
+
+        }
+        else{
 
             try {
                 //look through users table for a match of both user and password
-                String sql = "SELECT * FROM STAFF WHERE USERNAME = ? and USERPASSWORD = ?";
+                String sql = "SELECT * FROM STAFF WHERE USERNAME = ? and PASSWORD = ?";
                 int i = 0;
                 st = con.prepareStatement(sql);
                 st.setString(1, user);
@@ -79,7 +91,7 @@ public class Login extends javax.swing.JFrame
                 if (i == 1) {
                     //login if there is ONLY one match for security
                     welcomeLabel.setText("Success! Logging you in....");
-                    new Main().setVisible(true);
+                    new NurseDashboard().setVisible(true);
                     this.dispose();
                 } else {
                     welcomeLabel.setText("Username or password incorrect. Please try again.");
@@ -92,6 +104,8 @@ public class Login extends javax.swing.JFrame
                 welcomeLabel.setText("We failed to connect to the database.");
 
             }
+            
+            
         }
     }
 
@@ -109,11 +123,14 @@ public class Login extends javax.swing.JFrame
         jLable3 = new javax.swing.JLabel();
         jLable4 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         welcomeLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/10685071_552528208208092_1866046325_n.jpg"))); // NOI18N
 
@@ -152,32 +169,32 @@ public class Login extends javax.swing.JFrame
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(126, 126, 126))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))
+                        .addGap(209, 209, 209))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLable3)
-                            .addComponent(jLable4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsername)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(loginButton)))
-                        .addGap(78, 78, 78))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLable3)
+                                    .addComponent(jLable4))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtUsername)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(28, 28, 28)
+                                        .addComponent(loginButton))
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(115, 115, 115))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(welcomeLabel)
@@ -191,24 +208,18 @@ public class Login extends javax.swing.JFrame
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(loginButton)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -227,40 +238,7 @@ validateLogin();        // TODO add your handling code here:
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
-    {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                new Login().setVisible(true);
-            }
-        });
-    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -269,7 +247,7 @@ validateLogin();        // TODO add your handling code here:
     private javax.swing.JLabel jLable4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
