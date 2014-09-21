@@ -69,7 +69,7 @@ public class Login extends javax.swing.JFrame
             welcomeLabel.setText("Success! Logging you in....");
         //backup user which always works
 
-            new DoctorInterface().setVisible(true);
+            new DoctorDashboard().setVisible(true);
             this.dispose();
 
         }
