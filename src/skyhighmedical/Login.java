@@ -91,7 +91,7 @@ public class Login extends javax.swing.JFrame
                 if (i == 1) {
                     //login if there is ONLY one match for security
                     welcomeLabel.setText("Success! Logging you in....");
-                    new NurseDashboard().setVisible(true);
+                    new SecretaryDashboard().setVisible(true);
                     this.dispose();
                 } else {
                     welcomeLabel.setText("Username or password incorrect. Please try again.");

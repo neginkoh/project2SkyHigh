@@ -10,12 +10,12 @@ package skyhighmedical;
  *
  * @author user
  */
-public class SearchPatientNurse extends javax.swing.JPanel {
+public class SearchPatientSecretary extends javax.swing.JPanel {
 
     /**
      * Creates new form SearchPatientNurse
      */
-    public SearchPatientNurse() {
+    public SearchPatientSecretary() {
         initComponents();
     }
 
