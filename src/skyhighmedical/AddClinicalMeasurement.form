@@ -32,13 +32,19 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jLabel1" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="352" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="134" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="333" max="32767" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -47,15 +53,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" pref="79" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
-                      <Component id="jLabel2" max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="79" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jLabel2" alignment="1" pref="99" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,39 +83,28 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="LungFunction" max="32767" attributes="0"/>
+                              <Component id="OxygenLevel" alignment="1" max="32767" attributes="0"/>
+                              <Component id="CurrentWeight" alignment="1" max="32767" attributes="0"/>
+                              <Component id="PatientName" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BloodPressure" alignment="1" max="32767" attributes="0"/>
+                              <Component id="HeartRate" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="Temperature" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="CurrentWeight" pref="88" max="32767" attributes="0"/>
-                                  <Component id="PatientName" max="32767" attributes="0"/>
-                                  <Component id="BloodPressure" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="Temperature" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="InputTemperature" max="32767" attributes="0"/>
-                              <Component id="InputCurrentWeight" alignment="1" max="32767" attributes="0"/>
-                              <Component id="InputBloodPressure" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="HeartRate" min="-2" pref="88" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="InputHeartRate" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="LungFunction" min="-2" pref="88" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="InputLungFunction" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="OxygenLevel" min="-2" pref="88" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="InputOxygenLevel" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="InputHeartRate" max="32767" attributes="0"/>
+                      <Component id="InputTemperature" max="32767" attributes="0"/>
+                      <Component id="InputCurrentWeight" alignment="1" max="32767" attributes="0"/>
+                      <Component id="InputBloodPressure" alignment="1" max="32767" attributes="0"/>
+                      <Component id="InputOxygenLevel" max="32767" attributes="0"/>
+                      <Component id="InputLungFunction" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -116,12 +113,12 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="PatientName" min="-2" pref="28" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="InputCurrentWeight" pref="33" max="32767" attributes="0"/>
-                      <Component id="CurrentWeight" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="CurrentWeight" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="InputCurrentWeight" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -129,26 +126,26 @@
                       <Component id="InputTemperature" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BloodPressure" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="InputBloodPressure" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="InputHeartRate" pref="33" max="32767" attributes="0"/>
-                      <Component id="HeartRate" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="OxygenLevel" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="InputOxygenLevel" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="LungFunction" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="InputLungFunction" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="BloodPressure" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="InputBloodPressure" alignment="3" pref="37" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="InputHeartRate" max="32767" attributes="0"/>
+                      <Component id="HeartRate" pref="32" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="InputOxygenLevel" max="32767" attributes="0"/>
+                      <Component id="OxygenLevel" pref="33" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="InputLungFunction" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="LungFunction" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -156,42 +153,63 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="PatientName">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="1"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="-Patient Name-"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="CurrentWeight">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="1"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Current Weight"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="BloodPressure">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="1"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Blood Pressure"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="HeartRate">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="1"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Heart rate"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Temperature">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="1"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Temperature"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="LungFunction">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="1"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Lung function"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="OxygenLevel">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="1"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Oxygen level"/>
           </Properties>
@@ -217,6 +235,11 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Clinical Measurement"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
     </Component>
   </SubComponents>
