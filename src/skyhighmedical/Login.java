@@ -20,9 +20,11 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame
 {
-     private Connection con;
+    private Connection con;
     private PreparedStatement st;
     private ResultSet rs;
+    private static String USERNAME = "z3419939";
+    private static String PASSWORD = "zAnAnah2";
 
     /**
      * Creates new form Login
@@ -37,8 +39,10 @@ public class Login extends javax.swing.JFrame
     }
      public void connect() {
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/Project2;user=skyhigh;password=skyhigh");
+            Class.forName("oracle.jdbc.OracleDriver").newInstance();
+            String url = "jdbc:oracle:thin:@//" + "sage.business.unsw.edu.au" + ":" + "1521" + "/" + "orcl01" + ".asbpldb001.ad.unsw.edu.au";
+           
+            con = DriverManager.getConnection(url, USERNAME, PASSWORD);
             System.out.println("Connected to database");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Failed to connect to the database, please start the server"
@@ -49,15 +53,15 @@ public class Login extends javax.swing.JFrame
     
     
      public void validateLogin() {
-        String user = txtUsername.getText();
-        String pass = txtPassword.getText();
+        String userName = txtUsername.getText();
+        String userPassword = txtPassword.getText();
 
         if (txtUsername.getText().length() == 0 || txtPassword.getText().length() == 0) {
             welcomeLabel.setText("Either username or password field is empty.");
             JOptionPane.showMessageDialog(null, "Either the username or password field is empty,"
                             + " please try again.");
 
-        } else if ("admin".equals(user) && "admin".equals(pass)) {
+        } else if ("negina".equals(userName) && "negina".equals(userPassword)) {
             welcomeLabel.setText("Success! Logging you in....");
         //backup user which always works
 
@@ -65,7 +69,7 @@ public class Login extends javax.swing.JFrame
             this.dispose();
 
         } 
-        else if ("doctor".equals(user) && "doctor".equals(pass)) {
+        else if ("sanea".equals(userName) && "sanea".equals(userPassword)) {
             welcomeLabel.setText("Success! Logging you in....");
         //backup user which always works
 
@@ -77,11 +81,13 @@ public class Login extends javax.swing.JFrame
 
             try {
                 //look through users table for a match of both user and password
-                String sql = "SELECT * FROM STAFF WHERE USERNAME = ? and PASSWORD = ?";
+                String sql = "SELECT * FROM z3419939.users WHERE userName = ? and userPassword = ?";
+               
                 int i = 0;
                 st = con.prepareStatement(sql);
-                st.setString(1, user);
-                st.setString(2, pass);
+                st.setString(1, userName);
+                st.setString(2, userPassword);
+                
                 rs = st.executeQuery();
 
                 while (rs.next()) {
@@ -108,6 +114,7 @@ public class Login extends javax.swing.JFrame
             
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form. WARNING: Do NOT
