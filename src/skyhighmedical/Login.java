@@ -122,8 +122,7 @@ public class Login extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -149,10 +148,8 @@ public class Login extends javax.swing.JFrame
         jLable4.setForeground(new java.awt.Color(0, 153, 153));
         jLable4.setText("Password:");
 
-        txtUsername.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
             }
         });
@@ -164,10 +161,8 @@ public class Login extends javax.swing.JFrame
         loginButton.setFont(new java.awt.Font("Malayalam MN", 1, 13)); // NOI18N
         loginButton.setForeground(new java.awt.Color(0, 153, 153));
         loginButton.setText("Login");
-        loginButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
             }
         });
