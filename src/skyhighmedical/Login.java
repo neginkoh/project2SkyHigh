@@ -55,7 +55,7 @@ public class Login extends javax.swing.JFrame
      public void validateLogin() {
         String userName = txtUsername.getText();
         String userPassword = txtPassword.getText();
-
+/*
         if (txtUsername.getText().length() == 0 || txtPassword.getText().length() == 0) {
             welcomeLabel.setText("Either username or password field is empty.");
             JOptionPane.showMessageDialog(null, "Either the username or password field is empty,"
@@ -79,11 +79,12 @@ public class Login extends javax.swing.JFrame
         }
         else{
 
-            try {
+ */           try {
                 //look through users table for a match of both user and password
-                String sql = "SELECT * FROM z3419939.users WHERE userName = ? and userPassword = ?";
+                String sql = "SELECT privilege FROM z3419939.users WHERE userName = ? and userPassword = ?";
                
                 int i = 0;
+                String privilege = "";
                 st = con.prepareStatement(sql);
                 st.setString(1, userName);
                 st.setString(2, userPassword);
@@ -91,15 +92,26 @@ public class Login extends javax.swing.JFrame
                 rs = st.executeQuery();
 
                 while (rs.next()) {
-                    i++;
+           //         i++;
+                    privilege = rs.getNString("PRIVILEGE");
                     //increment i if match found
                 }
-                if (i == 1) {
+         //       if (i == 1) {
+                if (privilege.equalsIgnoreCase("admin")) {
                     //login if there is ONLY one match for security
                     welcomeLabel.setText("Success! Logging you in....");
-                    new NurseDashboard().setVisible(true);
+                    new AdminDashboard().setVisible(true);
+          //          new NurseDashboard().setVisible(true);
                     this.dispose();
-                } else {
+                } else if (privilege.equalsIgnoreCase("doctor")) {
+                     welcomeLabel.setText("Success! Logging you in....");
+                    new DoctorDashboard().setVisible(true);
+                } else if (privilege.equalsIgnoreCase("nurse")) {
+                     welcomeLabel.setText("Success! Logging you in....");
+                    new NurseDashboard().setVisible(true);
+                } 
+                
+                else {
                     welcomeLabel.setText("Username or password incorrect. Please try again.");
                     JOptionPane.showMessageDialog(null, "Username or password was entered incorrectly,"
                             + " please try again.");
@@ -110,9 +122,7 @@ public class Login extends javax.swing.JFrame
                 welcomeLabel.setText("We failed to connect to the database.");
 
             }
-            
-            
-        }
+ //       }
     }
 
 
@@ -135,6 +145,8 @@ public class Login extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setBounds(new java.awt.Rectangle(300, 200, 0, 0));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
