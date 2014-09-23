@@ -49,14 +49,15 @@ public class SecretaryAddPatient1 extends javax.swing.JFrame {
     
     public void insertPatient() {
         try {
-                String sql = "INSERT into PATIENT (PATIENTID, FIRSTNAME, LASTNAME, CONTACT, GP)"
-                        + "VALUES(?, ?, ?, ?, ?)";
+                String sql = "INSERT into PATIENT (PATIENTID, FIRSTNAME, LASTNAME, CONTACT,ADDRESS, GP)"
+                        + "VALUES(?, ?, ?, ?, ?, ?)";
                 st = con.prepareStatement(sql);
                 st.setString(1, idfield.getText());
                 st.setString(2, fnamefield.getText());
                 st.setString(3, lnamefield.getText());
                 st.setString(4, contactfield.getText());
-                st.setString(5, gpfield.getText());
+                st.setString(5,addressfield.getText());
+                st.setString(6, gpfield.getText());
 
                 st.execute();
         }
