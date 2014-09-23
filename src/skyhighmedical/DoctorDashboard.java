@@ -509,7 +509,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
 
     private void PatientActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_PatientActionPerformed
     {//GEN-HEADEREND:event_PatientActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_PatientActionPerformed
 
     /**
