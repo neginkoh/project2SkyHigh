@@ -81,7 +81,7 @@ public class Login extends javax.swing.JFrame
 
  */           try {
                 //look through users table for a match of both user and password
-                String sql = "SELECT privilege FROM z3419939.users WHERE userName = ? and userPassword = ?";
+                String sql = "SELECT privilege FROM z3419939.staffmember WHERE USERNAME = ? and PASSWORD = ?";
                
                 int i = 0;
                 String privilege = "";
