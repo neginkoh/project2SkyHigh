@@ -23,8 +23,8 @@ public class Login extends javax.swing.JFrame
     private Connection con;
     private PreparedStatement st;
     private ResultSet rs;
-    private static String USERNAME = "z3419939";
-    private static String PASSWORD = "zAnAnah2";
+    public static String USERNAME = "z3419939";
+    public static String PASSWORD = "zAnAnah2";
 
     /**
      * Creates new form Login
