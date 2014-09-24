@@ -172,6 +172,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel4"/>
           </Properties>
+          <Events>
+            <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="PatientIdComponentAdded"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

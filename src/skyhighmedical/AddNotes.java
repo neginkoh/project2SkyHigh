@@ -48,18 +48,25 @@ public class AddNotes extends javax.swing.JFrame {
                    }
     }
         private void fetchEmployee(){
-        PatientId.setText(PatientID);
-        try{
-            String sql = "SELECT PATIENTID from PATIENT WHERE PATIENTID= ?";
-            st = con.prepareStatement(sql);
+              try {
+            String sql = "SELECT PATIENTID from PATIENT WHERE =? ";
             st.setString(1, PatientID);
+            st = con.prepareStatement(sql);
             rs = st.executeQuery();
-                    }
-        catch(Exception e){
-            System.out.println("Failed to fetch details");
+            while (rs.next()) {
+               
+                PatientID= rs.getString("PATIENTID");
+                
+                PatientId.setText(PatientID + " " );
+            }
+                           
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,e);
         }
-    }
+        }
     public void insertNotes() {
+        
         try {
                 String sql = "INSERT into NOTE (PATIENTID, MESSAGE)"
                         + "VALUES(?, ?)";
@@ -123,6 +130,11 @@ public class AddNotes extends javax.swing.JFrame {
         });
 
         PatientId.setText("jLabel4");
+        PatientId.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                PatientIdComponentAdded(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -197,6 +209,10 @@ public class AddNotes extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          insertNotes();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void PatientIdComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_PatientIdComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PatientIdComponentAdded
 
     /**
      * @param args the command line arguments
