@@ -189,7 +189,7 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent ae) {
             int elementToEdit = DocSearchTable.getSelectedRow();
             if (elementToEdit != -1) {
-                 new AddNote().setVisible(true);
+                 new AddNotes().setVisible(true);
               
                 //confirmation box
                   
