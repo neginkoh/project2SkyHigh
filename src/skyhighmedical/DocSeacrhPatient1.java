@@ -91,7 +91,7 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
         tableModel = new DefaultTableModel();
         tableModel.setColumnCount(4);
         tableModel.setColumnIdentifiers(new String[]{"Patient ID", "First Name", "Last Name", "Contact"});
-        jTable1.setModel(tableModel);
+        DocSearchTable.setModel(tableModel);
     }
     private void search() {
         try {
@@ -183,17 +183,16 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
         }
     }
      private final ActionListener AddNotesListener = new ActionListener() {
-        private PatientAll beingEdited;
+        private PatientAll current;
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            int elementToEdit = jTable1.getSelectedRow();
+            int elementToEdit = DocSearchTable.getSelectedRow();
             if (elementToEdit != -1) {
-                beingEdited = entries.get(elementToEdit);
-                String selected = beingEdited.getPatientID();
-                System.out.println(selected);
+                 new AddNote().setVisible(true);
+              
                 //confirmation box
-                  new AddNote().setVisible(true);
+                  
                 
             }
         }
@@ -210,7 +209,7 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
         //add to menu
         popupMenu.add(AddPatientNotes);
         
-        jTable1.setComponentPopupMenu(popupMenu);
+        DocSearchTable.setComponentPopupMenu(popupMenu);
 
        
     }
@@ -231,7 +230,7 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        DocSearchTable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -253,7 +252,7 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1411298576_search_magnifying_glass_find-32.png"))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        DocSearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -264,7 +263,7 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(DocSearchTable);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel4.setText("Dcotor Patient Search");
@@ -390,6 +389,7 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable DocSearchTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -398,7 +398,6 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

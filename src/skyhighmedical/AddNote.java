@@ -28,26 +28,17 @@ public class AddNote extends javax.swing.JFrame {
     private ResultSet rs;
     private static String USERNAME = "z3419939";
     private static String PASSWORD = "zAnAnah2";
-    List<PatientAll> entries;
-    ListOfPatientId jq;
+    
     
     public AddNote() {
         initComponents();
-        loadComboBox();
+       
         connect();
-        this.jq = new ListOfPatientId();
+        
         
         }
-    public void loadComboBox(){
-        entries = jq.getAllPatient();
 
-        int tableRow = 0;
-        jComboBox1.addItem(entries.size());
-        for (PatientAll e : entries) {
-            jComboBox1.addItem(e.getPatientID());
-           
-        }
-    }
+   
     public void connect() {
         try {
             Class.forName("oracle.jdbc.OracleDriver").newInstance();
