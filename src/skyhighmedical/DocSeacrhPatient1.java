@@ -6,39 +6,49 @@
 
 package skyhighmedical;
 
-/**
- *
- * @author user
- */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
-public class DoctorSearchPatient extends javax.swing.JFrame {
+/**
+ *
+ * @author user
+ */
+public class DocSeacrhPatient1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form DoctorSearchPatient
+     * Creates new form SearchPatientSecretary1
      */
-    public DoctorSearchPatient() {
-        setupTable1();
-         connect();
-        
+    public DocSeacrhPatient1() {
         initComponents();
+        setupTable();
+         connect();
+         fetch();
+         loadPopupMenu();
     }
     private static String USERNAME = "z3419939";
     private static String PASSWORD = "zAnAnah2";
     private Connection con;
-    private DefaultTableModel tableModel2;
+    private DefaultTableModel tableModel;
     private PreparedStatement st;
     private ResultSet rs;
-    private int tableRow1;
-    private String fname1;
+    private int tableRow;
+    private String fname;
+     List<PatientAll> entries;
     
-    public void connect() {
+    
+   
+    
+     public void connect() {
         try {
             Class.forName("oracle.jdbc.OracleDriver").newInstance();
             String url = "jdbc:oracle:thin:@//" + "sage.business.unsw.edu.au" + ":" + "1521" + "/" + "orcl01" + ".asbpldb001.ad.unsw.edu.au";
@@ -50,33 +60,55 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
                     + " in the 'Services' tab or read the setup instructions.");
                    }
     }
-    
-      public void setupTable1() {
-        setupSearchTable1();
-    }
-    private void setupSearchTable1() {
+     public void fetch(){
+             try {
+            String sql = "SELECT USERNAME from STAFFMEMBER WHERE PRIVILEGE= 'doctor'";
+            st = con.prepareStatement(sql);
+            rs = st.executeQuery();
+            while (rs.next()) {
+               
+                fname = rs.getString("USERNAME");
+                
+                jLabel5.setText(fname + " " );
+            }
+                           
 
-        tableModel2 = new DefaultTableModel();
-        tableModel2.setColumnCount(4);
-        tableModel2.setColumnIdentifiers(new String[]{"Patient ID", "First Name", "Last Name", "Contact"});
-        DocSearchTable1.setModel(tableModel2);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+             }
+     
+     
+    
+
+     
+    
+    public void setupTable() {
+        setupSearchTable();
+    }
+    private void setupSearchTable() {
+
+        tableModel = new DefaultTableModel();
+        tableModel.setColumnCount(4);
+        tableModel.setColumnIdentifiers(new String[]{"Patient ID", "First Name", "Last Name", "Contact"});
+        jTable1.setModel(tableModel);
     }
     private void search() {
         try {
             String sql = "Select * from PATIENT where PATIENTID LIKE ?";
             st = con.prepareStatement(sql);
-            st.setString(1, SearchPatientField.getText());
+            st.setString(1, jTextField2.getText());
             rs = st.executeQuery();
             if (rs.next()) {
-                tableModel2.setNumRows(1);
+                tableModel.setNumRows(1);
                 String add1 = rs.getString("PATIENTID");
-                tableModel2.setValueAt(add1, tableRow1, 0);
+                tableModel.setValueAt(add1, tableRow, 0);
                 String add2 = rs.getString("FIRSTNAME");
-                tableModel2.setValueAt(add2, tableRow1, 1);
+                tableModel.setValueAt(add2, tableRow, 1);
                 String add3 = rs.getString("LASTNAME");
-                tableModel2.setValueAt(add3, tableRow1, 2);
+                tableModel.setValueAt(add3, tableRow, 2);
                 String add4 = rs.getString("CONTACT");
-                tableModel2.setValueAt(add4, tableRow1, 3);
+                tableModel.setValueAt(add4, tableRow, 3);
 
             }
 
@@ -87,18 +119,18 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
         try {
             String sql = "Select * from PATIENT where FIRSTNAME LIKE ?";
             st = con.prepareStatement(sql);
-            st.setString(1, SearchPatientField.getText());
+            st.setString(1, jTextField2.getText());
             rs = st.executeQuery();
             if (rs.next()) {
-                tableModel2.setNumRows(1);
+                tableModel.setNumRows(1);
                 String add1 = rs.getString("PATIENTID");
-                tableModel2.setValueAt(add1, tableRow1, 0);
+                tableModel.setValueAt(add1, tableRow, 0);
                 String add2 = rs.getString("FIRSTNAME");
-                tableModel2.setValueAt(add2, tableRow1, 1);
+                tableModel.setValueAt(add2, tableRow, 1);
                 String add3 = rs.getString("LASTNAME");
-                tableModel2.setValueAt(add3, tableRow1, 2);
+                tableModel.setValueAt(add3, tableRow, 2);
                 String add4 = rs.getString("CONTACT");
-                tableModel2.setValueAt(add4, tableRow1, 3);
+                tableModel.setValueAt(add4, tableRow, 3);
 
             }
 
@@ -108,18 +140,18 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
         try {
             String sql = "Select * from PATIENT where LASTNAME LIKE ?";
             st = con.prepareStatement(sql);
-            st.setString(1, SearchPatientField.getText());
+            st.setString(1, jTextField2.getText());
             rs = st.executeQuery();
             if (rs.next()) {
-                tableModel2.setNumRows(1);
+                tableModel.setNumRows(1);
                 String add1 = rs.getString("PATIENTID");
-                tableModel2.setValueAt(add1, tableRow1, 0);
+                tableModel.setValueAt(add1, tableRow, 0);
                 String add2 = rs.getString("FIRSTNAME");
-                tableModel2.setValueAt(add2, tableRow1, 1);
+                tableModel.setValueAt(add2, tableRow, 1);
                 String add3 = rs.getString("LASTNAME");
-                tableModel2.setValueAt(add3, tableRow1, 2);
+                tableModel.setValueAt(add3, tableRow, 2);
                 String add4 = rs.getString("CONTACT");
-                tableModel2.setValueAt(add4, tableRow1, 3);
+                tableModel.setValueAt(add4, tableRow, 3);
 
             }
 
@@ -129,18 +161,18 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
         try {
             String sql = "Select * from PATIENT where CONTACT LIKE ?";
             st = con.prepareStatement(sql);
-            st.setString(1, SearchPatientField.getText());
+            st.setString(1, jTextField2.getText());
             rs = st.executeQuery();
             if (rs.next()) {
-                tableModel2.setNumRows(1);
+                tableModel.setNumRows(1);
                 String add1 = rs.getString("PATIENTID");
-                tableModel2.setValueAt(add1, tableRow1, 0);
+                tableModel.setValueAt(add1, tableRow, 0);
                 String add2 = rs.getString("FIRSTNAME");
-                tableModel2.setValueAt(add2, tableRow1, 1);
+                tableModel.setValueAt(add2, tableRow, 1);
                 String add3 = rs.getString("LASTNAME");
-                tableModel2.setValueAt(add3, tableRow1, 2);
+                tableModel.setValueAt(add3, tableRow, 2);
                 String add4 = rs.getString("CONTACT");
-                tableModel2.setValueAt(add4, tableRow1, 3);
+                tableModel.setValueAt(add4, tableRow, 3);
 
             }
 
@@ -150,6 +182,39 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+     private final ActionListener AddNotesListener = new ActionListener() {
+        private PatientAll beingEdited;
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            int elementToEdit = jTable1.getSelectedRow();
+            if (elementToEdit != -1) {
+                beingEdited = entries.get(elementToEdit);
+                String selected = beingEdited.getPatientID();
+                System.out.println(selected);
+                //confirmation box
+                  new AddNote().setVisible(true);
+                
+            }
+        }
+
+    };
+    private void loadPopupMenu() {
+        JPopupMenu popupMenu = new JPopupMenu();
+        //name right click text
+        JMenuItem AddPatientNotes = new JMenuItem("Add Patient Notes");
+        
+        //assign to listener
+        AddPatientNotes.addActionListener(AddNotesListener);
+        
+        //add to menu
+        popupMenu.add(AddPatientNotes);
+        
+        jTable1.setComponentPopupMenu(popupMenu);
+
+       
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,13 +227,13 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        SearchPatientField = new javax.swing.JTextField();
-        searchButton2 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        DocName = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        DocSearchTable1 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,21 +244,16 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
 
         jLabel2.setText("Username:");
 
-        searchButton2.setText("Search");
-        searchButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1411298576_search_magnifying_glass_find-32.png"))); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel4.setText("Doctor Patient Search");
-
-        DocName.setText("jLabel5");
-
-        DocSearchTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -204,7 +264,12 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(DocSearchTable1);
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel4.setText("Dcotor Patient Search");
+
+        jLabel5.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -212,18 +277,22 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(249, 249, 249)
-                .addComponent(SearchPatientField, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(searchButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(267, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DocName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(195, 195, 195))))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1041, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -231,10 +300,6 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(332, 332, 332))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +309,7 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(DocName))
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -253,11 +318,11 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(38, 38, 38)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SearchPatientField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,7 +338,7 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 637, Short.MAX_VALUE)
+            .addGap(0, 611, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -284,10 +349,10 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton2ActionPerformed
-        setupSearchTable1();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setupSearchTable();
         search();
-    }//GEN-LAST:event_searchButton2ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,34 +371,34 @@ public class DoctorSearchPatient extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DoctorSearchPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DocSeacrhPatient1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DoctorSearchPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DocSeacrhPatient1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DoctorSearchPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DocSeacrhPatient1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoctorSearchPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DocSeacrhPatient1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DoctorSearchPatient().setVisible(true);
+                new DocSeacrhPatient1().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DocName;
-    private javax.swing.JTable DocSearchTable1;
-    private javax.swing.JTextField SearchPatientField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton searchButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
