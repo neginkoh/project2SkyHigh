@@ -342,7 +342,7 @@ public class DocSeacrhPatient1 extends javax.swing.JFrame {
         String firstName = (String)DocSearchTable.getValueAt(rowNum, 1);
         String lastName = (String)DocSearchTable.getValueAt(rowNum, 2);
         String contact = (String)DocSearchTable.getValueAt(rowNum, 3);
-        new AddNotes(patientId).setVisible(true);
+        new AddNotes( patientId, firstName, lastName).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
