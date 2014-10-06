@@ -35,6 +35,12 @@ public class AddNotes extends javax.swing.JFrame {
         connect();
         
     }
+     public AddNotes (String patientId) {
+        initComponents();
+        connect();
+        jLabel4.setText(patientId);
+       
+    }
     public void connect() {
         try {
             Class.forName("oracle.jdbc.OracleDriver").newInstance();
@@ -47,41 +53,46 @@ public class AddNotes extends javax.swing.JFrame {
                     + " in the 'Services' tab or read the setup instructions.");
                    }
     }
-        private void fetchEmployee(){
-              try {
-            String sql = "SELECT PATIENTID from PATIENT WHERE =? ";
-            st.setString(1, PatientID);
-            st = con.prepareStatement(sql);
-            rs = st.executeQuery();
-            while (rs.next()) {
-               
-                PatientID= rs.getString("PATIENTID");
-                
-                PatientId.setText(PatientID + " " );
-            }
-                           
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
-        }
-    public void insertNotes() {
+    public void AddNotes() {
+    
+        String patientId = jLabel4.getText();
         
-        try {
-                String sql = "INSERT into NOTE (PATIENTID, MESSAGE)"
-                        + "VALUES(?, ?)";
-                st = con.prepareStatement(sql);
-                st.setString(1, PatientId.getText());
-                st.setString(2, jTextArea1.getText());
-                
-
-                st.execute();
+           
+        int newPatientId = Integer.parseInt(patientId);
+         try {
+        
+        String sql = "INSERT into NOTE (MESSAGE,PATIENTID)" +
+                        "VALUES(?, ?)";
+        st = con.prepareStatement(sql);
+                st.setString(1, jTextArea1.getText());
+                st.setString(2, jLabel4.getText());
+                     
+               
+               int n = st.executeUpdate();
+                       
+                       
+               /*        
+                       
+               rs.updateInt ("patientId", newPatientId);
+               rs.updateString ("FirstName", firstName);
+               rs.updateString ("LastName", lastName);
+               rs.updateString ("Contact", contact);
+               //rs.updateString ("Address", address);
+               //rs.updateString ("Gp", gp);*/
+               
+               if (n == 1){
+                   JOptionPane.showMessageDialog(null, "Notes has been added successfully !");
+               }
+               else {
+                   JOptionPane.showMessageDialog(null, "Add Notes failed !"); 
+               }
         }
-        catch (Exception e) {
-            
-        JOptionPane.showMessageDialog(null, "Patient has been added successfully !");
+        catch (SQLException err) {
+            System.out.println(err.getMessage());
+        }
+       
     }
-    }
+       
 
 
     /**
@@ -102,6 +113,7 @@ public class AddNotes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         PatientId = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,12 +141,17 @@ public class AddNotes extends javax.swing.JFrame {
             }
         });
 
-        PatientId.setText("jLabel4");
+        PatientId.setText(PatientId.getName());
         PatientId.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 PatientIdComponentAdded(evt);
             }
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                PatientIdComponentRemoved(evt);
+            }
         });
+
+        jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,25 +160,28 @@ public class AddNotes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PatientId)
+                                .addGap(502, 502, 502))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(PatientId)
-                                .addGap(496, 496, 496)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -171,10 +191,11 @@ public class AddNotes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(PatientId))
+                    .addComponent(PatientId)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
@@ -182,12 +203,14 @@ public class AddNotes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
+
+        jLabel4.getAccessibleContext().setAccessibleParent(PatientId);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,12 +230,16 @@ public class AddNotes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         insertNotes();
+     AddNotes();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void PatientIdComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_PatientIdComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_PatientIdComponentAdded
+
+    private void PatientIdComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_PatientIdComponentRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PatientIdComponentRemoved
 
     /**
      * @param args the command line arguments
@@ -255,6 +282,7 @@ public class AddNotes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
